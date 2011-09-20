@@ -1,6 +1,6 @@
 // parses the URI to create a global
 function routeParser(customRoutes){
-	
+
 	// private parsing method
 	var parse = function(uri, routeToOverride){
 	
@@ -43,8 +43,9 @@ function routeParser(customRoutes){
 		return route;
 	}
 	
+	// ** public ** //
 	return function(req, res, next){			
-
+			
 			// set access to route
 			var route	 	= parse(req.params[0]),
 					params	= req.params[0].replace(/\/$/g, ''); // removes trailing slash
@@ -56,6 +57,12 @@ function routeParser(customRoutes){
 				route = parse(customRoutes[params]);
 			}
 			
+			// load the index page set in routes
+			else if(req.params[0] === ''){
+				route = parse(customRoutes['/']);
+			}
+			
+			// set route in req global
 			req.route = route;
 			
 			// move on

@@ -1,7 +1,7 @@
 var auth = function(req, res){
 		
 		// private
-		var variable =  "auth";
+		var that = this;
 		
 		// public
 		return {
