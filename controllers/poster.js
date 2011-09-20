@@ -9,10 +9,15 @@ var poster = function(req, res){
 			index: function(args){
 			
 				res.render('index', {
-			    title: args
+			    title: 'test'
 			  });
 			  
+			},
+			
+			custom_route: function(args){
+				res.send('this is your custom route with args: ' + args);
 			}
+			
 		}
 			
 }
