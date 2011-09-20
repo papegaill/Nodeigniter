@@ -14,8 +14,8 @@ var poster = function(req, res){
 			  
 			},
 			
-			custom_route: function(args){
-				res.send('this is your custom route with args: ' + args);
+			login: function(args){
+				res.send('you are trying to login');
 			}
 			
 		}

@@ -1,5 +1,6 @@
 exports.route = {
 
-	'/custom-route/testing': 'poster/custom_route'
+	'login': 'auth/login',
+	'logout': 'auth/logout'
 	
 };

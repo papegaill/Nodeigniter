@@ -6,7 +6,7 @@
 var express 			= require('express'),
 	  connect 			= require('connect'),
 	  customRoutes	= require('./routes.js').route,
-	  parseRoute		= require('./modules/parseRoute').parse,
+	  routeParser		= require('./modules/routeParser').parse,
 	  controller 		= require('./modules/callController'),
 		public 				= __dirname + "/public",
 		app 					= module.exports = express.createServer();
@@ -39,12 +39,10 @@ app.configure('production', function(){
 
 
 // global route - passes in customRoutes to be parsed
-app.get('/*', parseRoute(customRoutes), function(req, res, next){
+app.get('/*', routeParser(customRoutes), function(req, res, next){
 	var route = req.route;
 	controller.call(route, req, res, next);
 });
-
-
 
 
 // 404
