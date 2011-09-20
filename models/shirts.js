@@ -1,31 +1,36 @@
-require('./db');
-
-var Shirts = function(){
-		
+var Shirts = function(db){
 		// private
-		var ShirtSchema = new Schema({
+		var ShirtSchema = new db.Schema({
 			title       : {type : String, default : '', required : true},
 		  created_at  : {type : Date, default : Date.now},
 		  updated_at  : {type : Date, default : Date.now}
 		});
 		
-		var DB = mongoose.model('Shirt', ShirtSchema);
+		try{
+			var dbItem = db.model('Shirt', ShirtSchema);
+		}
+		catch(e){console.log(e)}
 		
 		// public
 		return {
 		
 			create: function(fields){
 				
-				shirt = new DB(fields);
+				shirt = new dbItem(fields);
 				
 				shirt.save(function(err){
-					console.log(err);
+					console.log('saved');
 				});
 				
+				return fields;				
 			},
 			
-			all: function(){
-				
+			all: function(callback){
+				return dbItem.find({}).desc('created_at').run(callback);
+			},
+			
+			getByTitle: function(title, callback){
+				return dbItem.find({title: title}).run(callback);
 			}
 			
 		}

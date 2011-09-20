@@ -4,7 +4,11 @@ var Controller = function(){
 	
 		load: {
 			model: function(modelName){
-				return require('./../models/' + modelName).model();
+				// load mongoose module
+				var db = require('./../models/db').mongoose;
+				
+				// load model and send to calling controller
+				return require('./../models/' + modelName).model(db);
 			},
 			
 			view: function(viewName, data){

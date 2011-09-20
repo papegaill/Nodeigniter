@@ -1,34 +1,34 @@
 var Shirt = function(req, res, base, settings){
 		//private
-		
+		var shirts = base.load.model('shirts');
 		
 		// public
 		return {
 		
 			index: function(){
-				res.render('shirt/index',{
-					content: req.method
+				
+				shirts.all(function(err, shirts){
+					res.json(shirts);
 				});
+				
 			},
 			
 			add: function(){
-
-				var shirts = base.load.model('shirts');
+				var shirt = req.body || null
 				
-				shirts.create({
-					title: 'Protect Cambodia Teesss'
-				});
+				if(shirt){
+					shirts.create(req.body);
+				}
 
-				res.send('shirt/add');
+				res.redirect('/shirt');
 			},
 			
-			get: function(id){
-				var data = {
-					title: id || 'no id'
-				}
+			get: function(title){
+			
+				shirts.getByTitle(title, function(err, shirt){
+					res.json(shirt);
+				});
 				
-				//res.render('header', data);
-				res.render('index', data);
 			}
 		}
 			

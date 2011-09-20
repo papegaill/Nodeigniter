@@ -1,6 +1,4 @@
-exports = mongoose = require('mongoose');
-
+var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/node-mvc');
 
-exports = Schema = mongoose.Schema;
-exports = ObjectID = Schema.ObjectID;
+exports.mongoose = mongoose
