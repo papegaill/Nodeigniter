@@ -24,7 +24,7 @@ var Shirt = function(req, res, base, settings){
 			},
 			
 			get: function(title){
-			
+				
 				shirts.getByTitle(title, function(err, shirt){
 					res.json(shirt);
 				});
@@ -35,4 +35,4 @@ var Shirt = function(req, res, base, settings){
 };
 
 
-exports.init = Shirt;
+exports.controller = Shirt;

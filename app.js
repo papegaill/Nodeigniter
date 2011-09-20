@@ -5,22 +5,23 @@
 */
 var express 				= require('express'),
 	  connect 				= require('connect'),
-	  customRoutes		= require('./routes.js').route,
+	  
+	  customRoutes		= require('./config/routes.js').routes,
 	  routeParser			= require('./system/routeParser').parse,
 	  controller			= require('./system/callController'),
+	  config					= require('./config/config.js').config,
+	  
 		public 					= __dirname + "/public",
+		
 		baseController	= require('./system/controller'),
+		baseModel				= require('./system/model'),
+		
 		app 						= module.exports = express.createServer();
 
+//ip = req.client.remoteAddress
 
 
-/*-----------------------------------------------------------
-| Database connection
-|------------------------------------------------------------
-|
-*/
-/* mongoose.connect('mongodb://localhost/node-mvc'); */
-
+console.log(config);
 
 /*-----------------------------------------------------------
 | Configuration
@@ -28,8 +29,8 @@ var express 				= require('express'),
 |
 */
 app.configure(function(){
-
 	app.set('controller', baseController);
+	app.set('model', baseModel);
 	
   app.set('views', __dirname + '/views');
   app.set('partials'   , __dirname + '/views/partials');

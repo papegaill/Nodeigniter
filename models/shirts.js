@@ -1,4 +1,4 @@
-var Shirts = function(db){
+var Shirts = function(db, base, settings){
 		// private
 		var ShirtSchema = new db.Schema({
 			title       : {type : String, default : '', required : true},
@@ -6,10 +6,7 @@ var Shirts = function(db){
 		  updated_at  : {type : Date, default : Date.now}
 		});
 		
-		try{
-			var dbItem = db.model('Shirt', ShirtSchema);
-		}
-		catch(e){console.log(e)}
+		var dbItem = db.model('Shirt', ShirtSchema);
 		
 		// public
 		return {

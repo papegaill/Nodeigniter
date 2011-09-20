@@ -5,7 +5,7 @@ var Controller = function(){
 		load: {
 			model: function(modelName){
 				// load mongoose module
-				var db = require('./../models/db').mongoose;
+				var db = require('./../config/db').mongoose;
 				
 				// load model and send to calling controller
 				return require('./../models/' + modelName).model(db);

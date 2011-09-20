@@ -17,9 +17,9 @@ function routeParser(customRoutes){
 		
 		// start setting up route
 		var route = {
-			controller:	params[0],
-			method:			params[1],
-			format:			format
+			controller:	(params[0]) ? params[0].toLowerCase() : undefined,
+			method:			(params[1]) ? params[1].toLowerCase() : undefined,
+			format:			(format) 		? format.toLowerCase() 		: undefined
 		};
 		
 		// set default method in route
