@@ -6,26 +6,30 @@ var Shirt = function(req, res, base, settings){
 		return {
 		
 			index: function(){
-				
+
 				shirts.all(function(err, shirts){
-					res.json(shirts);
+					if(!err){
+						res.json(shirts);
+					}
 				});
 				
 			},
 			
 			add: function(){
-				var shirt = req.body || null
-				
+				var shirt = req.body || {}
+
+				shirt.permalink = 'give-water-tee';
+
 				if(shirt){
-					shirts.create(req.body);
+					shirts.create(shirt);
 				}
 
 				res.redirect('/shirt');
 			},
 			
-			get: function(title){
-				
-				shirts.getByTitle(title, function(err, shirt){
+			get: function(permalink){
+			
+				shirts.getByPermalink(permalink, function(err, shirt){
 					res.json(shirt);
 				});
 				

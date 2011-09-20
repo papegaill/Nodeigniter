@@ -1,36 +1,30 @@
 var Shirts = function(db, base, settings){
-		// private
-		var ShirtSchema = new db.Schema({
-			title       : {type : String, default : '', required : true},
-		  created_at  : {type : Date, default : Date.now},
-		  updated_at  : {type : Date, default : Date.now}
-		});
+	
+	var collection = db.collection('shirts');
+	
+	// public
+	return {
+	
+		create: function(fields){
+				collection.insert(fields);
+		},
 		
-		var dbItem = db.model('Shirt', ShirtSchema);
+		all: function(callback){
+			//return query.find({}).desc('created_at').run(callback);
+			return collection.find().toArray(callback)
+		},
 		
-		// public
-		return {
+		getByTitle: function(title, callback){
+			var t = title.toString(); // must be a string
+			return collection.find({title: t}).toArray(callback);
+		},
 		
-			create: function(fields){
-				
-				shirt = new dbItem(fields);
-				
-				shirt.save(function(err){
-					console.log('saved');
-				});
-				
-				return fields;				
-			},
-			
-			all: function(callback){
-				return dbItem.find({}).desc('created_at').run(callback);
-			},
-			
-			getByTitle: function(title, callback){
-				return dbItem.find({title: title}).run(callback);
-			}
-			
+		getByPermalink: function(permalink, callback){
+			var p = permalink.toString(); // must be a string
+			return collection.find({permalink: p}).toArray(callback);
 		}
+			
+	}
 }
 
 exports.model = Shirts;

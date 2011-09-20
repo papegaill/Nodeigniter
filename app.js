@@ -20,9 +20,6 @@ var express 				= require('express'),
 
 //ip = req.client.remoteAddress
 
-
-console.log(config);
-
 /*-----------------------------------------------------------
 | Configuration
 |------------------------------------------------------------

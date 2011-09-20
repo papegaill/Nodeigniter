@@ -1,4 +1,4 @@
-var Model = function(){
+var Model = function(db, app){
 	
 	return {
 		

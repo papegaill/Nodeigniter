@@ -13,36 +13,19 @@ function routeParser(customRoutes){
 	
 		var route 				= {},
 			  params 				= uri.split('/'),
-				paramsLength 	= params.length;
-		
-		// start setting up route
-		var route = {
-			controller:	(params[0]) ? params[0].toLowerCase() : undefined,
-			method:			(params[1]) ? params[1].toLowerCase() : undefined,
-			format:			(format) 		? format.toLowerCase() 		: undefined
-		};
+				paramsLength 	= params.length,
+				
+				// start setting up route
+				route = {
+					controller:	(params[0]) ? params[0].toLowerCase() : undefined,
+					method:			(params[1]) ? params[1].toLowerCase() : undefined
+				};
 		
 		// set default method in route
 		route.method = (route.method === '') ? undefined : route.method;
 		
-		var args = params.splice(2) // all the other arguments in the URI
-		var format,
-			  lastArg;
-		
-		// only attempt if there are even values for args in the params
-		if(paramsLength > 2){
-			// get potential format
-			format = args[args.length-1].split('.')[1];
-			lastArg = args[args.length-1].split('.')[0];
-		}
-		
-		if(format){
-			route.format = format; // set format
-			args[args.length-1] = lastArg; // remove form extension from last pararm and reassign it in the array
-		}
-		
 		// set route args
-		route.args = args; 
+		route.args = params.splice(2) // all the other arguments in the URI
 		
 		/**********
 			return
@@ -59,9 +42,7 @@ function routeParser(customRoutes){
 			
 			// override if a custom route is available available
 			if(customRoutes[params]){
-				// override controller
-				console.log('overriding!!');
-				route = parse(customRoutes[params]);
+				route = parse(customRoutes[params]); // override controller
 			}
 			
 			// load the index page set in routes

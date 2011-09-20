@@ -1,4 +1,7 @@
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/node-mvc');
+var dbLibrary = 'mongoskin';
+var dbName = 'localhost/node-mvc';
 
-exports.mongoose = mongoose
+var mongo = require(dbLibrary);
+var db = mongo.db(dbName);
+
+exports.db = db;

@@ -14,7 +14,7 @@ function callController(route, app, req, res, next){
 
 	try{
 		// initialize controller
-		var controller = require(directory + route.controller).controller(req, res, app.settings.controller.inherit(), app.settings);		
+		var controller = require(directory + route.controller).controller(req, res, app.settings.controller.inherit(app), app.settings);		
 		
 		if(route.method && route.method !== ''){
 			controller[route.method](route.args);
