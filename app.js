@@ -1,26 +1,43 @@
+/*-----------------------------------------------------------
+| Module debepencies
+|------------------------------------------------------------
+|
+*/
+var express 				= require('express'),
+	  connect 				= require('connect'),
+	  customRoutes		= require('./routes.js').route,
+	  routeParser			= require('./system/routeParser').parse,
+	  controller			= require('./system/callController'),
+		public 					= __dirname + "/public",
+		baseController	= require('./system/controller'),
+		app 						= module.exports = express.createServer();
 
-/**
- * Module dependencies.
- */
-
-var express 			= require('express'),
-	  connect 			= require('connect'),
-	  customRoutes	= require('./routes.js').route,
-	  routeParser		= require('./modules/routeParser').parse,
-	  controller 		= require('./modules/callController'),
-		public 				= __dirname + "/public",
-		app 					= module.exports = express.createServer();
 
 
-// Configuration
+/*-----------------------------------------------------------
+| Database connection
+|------------------------------------------------------------
+|
+*/
+/* mongoose.connect('mongodb://localhost/node-mvc'); */
+
+
+/*-----------------------------------------------------------
+| Configuration
+|------------------------------------------------------------
+|
+*/
 app.configure(function(){
+
+	app.set('controller', baseController);
+	
   app.set('views', __dirname + '/views');
   app.set('partials'   , __dirname + '/views/partials');
   app.set('view engine', 'jade');
   app.set('view options', { layout: false });
   
   app.use(express.bodyParser());
-  app.use(express.methodOverride());
+  //app.use(express.methodOverride());
   app.use(app.router);
   
   app.use(express.static(public));
@@ -37,13 +54,22 @@ app.configure('production', function(){
 
 
 
-
-// global route - passes in customRoutes to be parsed
+/*-----------------------------------------------------------
+| Routing
+|------------------------------------------------------------
+|
+*/
+// get requests
 app.get('/*', routeParser(customRoutes), function(req, res, next){
 	var route = req.route;
-	controller.call(route, req, res, next);
+	controller.call(route, app, req, res, next);
 });
 
+//post requests
+app.post('/*', routeParser(customRoutes), function(req, res, next){
+	var route = req.route;
+	controller.call(route, app, req, res, next);
+});
 
 // 404
 app.use(function(req, res){ 
@@ -54,6 +80,10 @@ app.use(function(req, res){
 }); 
 
 
-
+/*-----------------------------------------------------------
+| Server port
+|------------------------------------------------------------
+|
+*/
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

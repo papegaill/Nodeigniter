@@ -1,4 +1,11 @@
-// parses the URI to create a global
+/*-----------------------------------------------------------
+| routeParser
+|------------------------------------------------------------
+|
+| @param customRoutes (array) - array of custom routes set in
+|															  ./routes.js
+|
+*/
 function routeParser(customRoutes){
 
 	// private parsing method

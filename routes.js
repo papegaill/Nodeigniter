@@ -1,5 +1,5 @@
 exports.route = {
 	
-	'/'			: 'auth/login', // default home page
+	'/'	: 'shirt/index', // default home page
 	
 };

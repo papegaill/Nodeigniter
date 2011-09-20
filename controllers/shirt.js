@@ -1,15 +1,25 @@
-exports.init = function(req, res){
+var Shirt = function(req, res, base, settings){
+		//private
 		
-		// private
-		var variable =  "this is private";
 		
 		// public
 		return {
 		
 			index: function(){
-				res.render('index', {
-			    title: variable
-			  });
+				res.render('shirt/index',{
+					content: req.method
+				});
+			},
+			
+			add: function(){
+
+				var shirts = base.load.model('shirts');
+				
+				shirts.create({
+					title: 'Protect Cambodia Teesss'
+				});
+
+				res.send('shirt/add');
 			},
 			
 			get: function(id){
@@ -22,5 +32,7 @@ exports.init = function(req, res){
 			}
 		}
 			
-}
-		
+};
+
+
+exports.init = Shirt;
