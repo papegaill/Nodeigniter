@@ -1,7 +1,7 @@
-var dbLibrary = 'mongoskin';
-var dbName = 'localhost/node-mvc';
+exports.db = {
 
-var mongo = require(dbLibrary);
-var db = mongo.db(dbName);
-
-exports.db = db;
+	driver:		'mongoskin',
+	hostname:	'localhost',
+	database:	'node-mvc'
+	
+}

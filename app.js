@@ -9,7 +9,9 @@ var express 				= require('express'),
 	  customRoutes		= require('./config/routes.js').routes,
 	  routeParser			= require('./system/routeParser').parse,
 	  controller			= require('./system/callController'),
+	  
 	  config					= require('./config/config.js').config,
+	  db							= require('./config/db.js').db;
 	  
 		public 					= __dirname + "/public",
 		
@@ -18,26 +20,33 @@ var express 				= require('express'),
 		
 		app 						= module.exports = express.createServer();
 
-//ip = req.client.remoteAddress
-
 /*-----------------------------------------------------------
 | Configuration
 |------------------------------------------------------------
 |
 */
 app.configure(function(){
+	
+	// base classes
 	app.set('controller', baseController);
 	app.set('model', baseModel);
 	
+	// custom config files
+	app.set('config', config);
+	app.set('db', db);
+	
+	//
   app.set('views', __dirname + '/views');
   app.set('partials'   , __dirname + '/views/partials');
   app.set('view engine', 'jade');
   app.set('view options', { layout: false });
   
+  //
   app.use(express.bodyParser());
   //app.use(express.methodOverride());
   app.use(app.router);
   
+  //
   app.use(express.static(public));
   app.use(express.compiler({src: public, enable: ['less'] }));
 });
