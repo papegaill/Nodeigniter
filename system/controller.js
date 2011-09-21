@@ -1,10 +1,10 @@
 var Controller = function(app){
-
-	return{
 	
+	return{
+		
 		load: {
-			model: function(modelName){
 			
+			model: function(modelName){
 				// load db info
 				var dbInfo = app.settings.db;
 				
@@ -18,6 +18,10 @@ var Controller = function(app){
 			
 			view: function(viewName, data){
 			
+			},
+			
+			helper: function(helperName){
+				console.log('loading ' + helperName);
 			}
 		}
 	

@@ -13,11 +13,18 @@ function callController(route, app, req, res, next){
 	var directory = './../controllers/'
 	
 	//white list by ip addres	
-	if(app.settings.config.whiteList === req.client.remoteAddress){
+	if(app.settings.config.access.whiteList === req.client.remoteAddress){
 		try{
 			// initialize controller
-			var controller = require(directory + route.controller).controller(req, res, app.settings.controller.inherit(app), app.settings);		
+			var controller = require(directory + route.controller).controller(req, res, app.settings.controller.inherit(app), app.settings);
 			
+			// inherit base controller members/methods
+			var parentController = new app.settings.controller.inherit(app);
+			for(prop in parentController) if(parentController.hasOwnProperty(prop)) {
+					controller[prop] = parentController[prop];
+			}
+			
+			// call controller method
 			if(route.method && route.method !== ''){
 				controller[route.method](route.args);
 			}

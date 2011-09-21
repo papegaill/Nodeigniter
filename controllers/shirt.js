@@ -1,13 +1,16 @@
 var Shirt = function(req, res, base, settings){
 		//private
-		var db = base.load.model('shirts');
+		
 		
 		// public
 		return {
-			
+					
 			//
 			index: function(){
-				db.all(function(err, shirts){
+				
+				var shirts = this.load.model('shirts');
+				
+				shirts.all(function(err, shirts){
 					if(!err){
 						res.json(shirts);
 					}
@@ -17,6 +20,7 @@ var Shirt = function(req, res, base, settings){
 			//
 			add: function(){
 				var shirt = req.body || {}
+				var db = this.load.model('shirts');
 
 				shirt.permalink = 'give-water-tee';
 
