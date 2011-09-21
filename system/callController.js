@@ -10,13 +10,12 @@
 |
 */
 function callController(route, app, req, res, next){
-	var directory = './../controllers/'
 	
 	//white list by ip addres	
 	if(app.settings.config.access.whiteList === req.client.remoteAddress){
 		try{
 			// initialize controller
-			var controller = require(directory + route.controller).controller(req, res, app.settings.controller.inherit(app), app.settings);
+			var controller = require(app.settings.controllerDirectory + '/' + route.controller).controller(req, res);
 			
 			// inherit base controller members/methods
 			var parentController = new app.settings.controller.inherit(app);

@@ -6,12 +6,12 @@
 var express 				= require('express'),
 	  connect 				= require('connect'),
 	  
-	  customRoutes		= require('./config/routes.js').routes,
+	  customRoutes		= require('./application/config/routes.js').routes,
 	  routeParser			= require('./system/routeParser').parse,
 	  controller			= require('./system/callController'),
 	  
-	  config					= require('./config/config.js').config,
-	  db							= require('./config/db.js').db;
+	  config					= require('./application/config/config.js').config,
+	  db							= require('./application/config/db.js').db;
 	  
 		public 					= __dirname + "/public",
 		
@@ -35,9 +35,13 @@ app.configure(function(){
 	app.set('config', config);
 	app.set('db', db);
 	
+	// directories
+	app.set('modelDirectory', __dirname + '/application/models');
+	app.set('controllerDirectory', __dirname + '/application/controllers');
+	app.set('views', __dirname + '/application/views');
+	app.set('partials'   , __dirname + '/application/views/partials');
+	
 	//
-  app.set('views', __dirname + '/views');
-  app.set('partials'   , __dirname + '/views/partials');
   app.set('view engine', 'jade');
   app.set('view options', { layout: false });
   

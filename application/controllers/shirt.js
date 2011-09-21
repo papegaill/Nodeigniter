@@ -1,4 +1,4 @@
-var Shirt = function(req, res, base, settings){
+var Shirt = function(req, res){
 		//private
 		
 		
@@ -33,7 +33,9 @@ var Shirt = function(req, res, base, settings){
 			
 			//
 			get: function(permalink){
-				db.getByPermalink(permalink, function(err, shirt){
+				var shirt = this.load.model('shirts');
+				
+				shirt.getByPermalink(permalink, function(err, shirt){
 					res.json(shirt);
 				});
 			}

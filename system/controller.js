@@ -1,6 +1,7 @@
 var Controller = function(app){
 	
 	return{
+		config: app.settings.config,
 		
 		load: {
 			
@@ -13,7 +14,7 @@ var Controller = function(app){
 				var db = mongo.db(dbInfo.hostname + '/' + dbInfo.database);
 
 				// load model and send to calling controller
-				return require('./../models/' + modelName).model(db, app.settings.model.inherit(db, app), app.settings);
+				return require(app.settings.modelDirectory + '/' + modelName).model(db, app.settings.model.inherit(db, app), app.settings);
 			},
 			
 			view: function(viewName, data){
