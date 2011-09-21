@@ -18,7 +18,7 @@ var Controller = function(app){
 			},
 			
 			view: function(viewName, data){
-			
+				console.log('loading ' + viewName);
 			},
 			
 			helper: function(helperName){
