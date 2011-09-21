@@ -7,13 +7,11 @@ var Shirt = function(req, res, base, settings){
 			
 			//
 			index: function(){
-
 				db.all(function(err, shirts){
 					if(!err){
 						res.json(shirts);
 					}
 				});
-				
 			},
 			
 			//
@@ -31,11 +29,9 @@ var Shirt = function(req, res, base, settings){
 			
 			//
 			get: function(permalink){
-			
 				db.getByPermalink(permalink, function(err, shirt){
 					res.json(shirt);
 				});
-				
 			}
 		}
 			
