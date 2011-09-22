@@ -2,7 +2,7 @@ exports.config = {
 	
 	url: {
 	
-		base: '50.57.121.7',
+		base: '127.0.0.1',
 		baseNotSecure: 'http://' + this.base,
 		baseSecure: 'https://' + this.base,
 
