@@ -1,4 +1,4 @@
-var directoryExists = require('../application/helpers/directory').directoryExists;
+require('../application/helpers/directory');
 
 
 /*-----------------------------------------------------------
@@ -16,8 +16,7 @@ function routeParser(customRoutes){
 	
 		var route 				= {},
 			  params 				= uri.split('/'),
-				paramsLength 	= params.length,
-				route;
+				paramsLength 	= params.length;
 		
 		// find if there is a directory, then set it
 		if(directoryExists(params[0])){
@@ -36,7 +35,7 @@ function routeParser(customRoutes){
 		route.method = (route.method === '') ? undefined : route.method;
 		
 		// set route args
-		route.args = params.splice(2) // all the other arguments in the URI
+		route.args = params.splice(2); // all the other arguments in the URI
 		
 		/**********
 			return
@@ -69,7 +68,7 @@ function routeParser(customRoutes){
 		}
 		// move on
 		next();
-	}
+	};
 }
 
 exports.parse = routeParser;

@@ -7,7 +7,7 @@ var fs = require('fs');
 | @param d (string) - directory to test
 |
 */
-var directoryExists = function(d){
+module.exports = directoryExists = function(d){
 
 	var dir = app.settings.controllerDirectory + '/' + d;
 	
@@ -19,5 +19,3 @@ var directoryExists = function(d){
   }
   
 }
-
-exports.directoryExists = directoryExists;
