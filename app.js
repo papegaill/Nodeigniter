@@ -5,6 +5,7 @@
 */
 var express 				= require('express'),
 	  connect 				= require('connect'),
+	  less						= require('less'),
 	  
 	  customRoutes		= require('./application/config/routes.js').routes,
 	  routeParser			= require('./system/routeParser').parse,
@@ -47,7 +48,7 @@ app.configure(function(){
   
   //
   app.use(express.bodyParser());
-  //app.use(express.methodOverride());
+  app.use(express.methodOverride());
   app.use(app.router);
   
   //

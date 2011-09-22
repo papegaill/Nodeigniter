@@ -1,0 +1,52 @@
+h1= title
+
+form(method='post', action='')
+
+	p
+		label(for='') Name
+		input(name='shirt[name]', type='text')
+	
+	hr
+	
+	p
+		h3 Shirt Information
+		label(for='shirt[info][price]') Price
+		input(name='shirt[info][price]', type='text')
+	p
+		label(for='shirt[info][tagline]') Your Purchase tagline
+		input(name='shirt[info][tagline]', type='text')
+	p
+		label(for='') Goal
+		input(name='shirt[info][goal]', type='text')
+	p
+		label(for='') Why the money is being raised 
+		input(name='shirt[info][moneyRaisedFor]', type='text')
+	
+	hr
+	
+	p
+		h3 Organization Information
+		label(for='shirt[organization][name]') Name
+		input(name='shirt[organization][name]', type='text')
+	p
+		label(for='shirt[organization][logo]') Logo
+		input(name='shirt[organization][logo]', type='text')
+	p
+		label(for='') Website Url
+		input(name='shirt[organization][websiteUrl]', type='text')
+	p
+		label(for='') Twitter Username
+		input(name='shirt[organization][twitterUsername]', type='text')
+	p
+		label(for='') Facebook URL
+		input(name='shirt[organization][facebookUrl]', type='text')
+	p
+		label(for='') Video SWF URL
+		input(name='shirt[organization][videoUrl]', type='text')
+		
+	hr	
+	
+	
+	p
+		input(type='submit', value='Publish')
+	

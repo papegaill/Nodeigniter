@@ -7,7 +7,7 @@ var Shirts = function(db, base, settings){
 		
 		//
 		create: function(fields){
-				collection.insert(fields);
+			collection.insert(fields);
 		},
 		
 		//

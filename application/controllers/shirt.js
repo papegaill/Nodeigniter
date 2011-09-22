@@ -1,6 +1,6 @@
 var Shirt = function(req, res){
 		//private
-		
+		var layout = 'layout';
 		
 		// public
 		return {
@@ -18,17 +18,21 @@ var Shirt = function(req, res){
 			},
 			
 			//
-			add: function(){
-				var shirt = req.body || {}
-				var db = this.load.model('shirts');
-
-				shirt.permalink = 'give-water-tee';
-
-				if(shirt){
-					db.create(shirt);
+			new: function(){
+				var data = req.body;
+				
+				if(data){
+					var shirts = this.load.model('shirts');
+					shirts.create(data);
+					res.json(data);
 				}
-
-				res.redirect('/shirt');
+				else{
+					res.render('shirt/new',{
+						layout: layout,
+						title: 'Add new shirt'
+					});
+				}
+				
 			},
 			
 			//
