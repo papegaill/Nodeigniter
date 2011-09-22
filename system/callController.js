@@ -13,9 +13,14 @@ function callController(route, app, req, res, next){
 	
 	//white list by ip addres	
 	if(app.settings.config.access.whiteList === req.client.remoteAddress){
+	
 		try{
+			
+			// use directory to call controller if it exists
+			var controllerLoc = (route.directory) ? route.directory + '/' + route.controller : route.controller;
+			
 			// initialize controller
-			var controller = require(app.settings.controllerDirectory + '/' + route.controller).controller(req, res);
+			var controller = require(app.settings.controllerDirectory + '/' + controllerLoc).controller(req, res);
 			
 			// inherit base controller members/methods
 			var parentController = new app.settings.controller.inherit(app);
@@ -32,9 +37,11 @@ function callController(route, app, req, res, next){
 			}		
 		}
 		
+		// page not found
 		catch(e){
 			next();
 		}
+		
 	}
 	else{
 		res.redirect('http://sevenly.org');
