@@ -1,0 +1,23 @@
+h1 Profile
+
+hr
+
+include _nav
+
+hr
+
+#profile_wrap
+	p <strong>First Name:</strong> #{users[0].info.firstName} #{users[0].info.lastName}
+	p <strong>Email:</strong> #{users[0].info.email}
+	p <strong>Phone:</strong> #{users[0].info.phone}
+	
+	p -------
+	
+	h2 Billing Info
+	p <strong>Address:</strong> #{users[0].billing.address}
+	p <strong>City:</strong> #{users[0].billing.city}
+	p <strong>State:</strong> #{users[0].billing.state}
+	p <strong>Country:</strong> #{users[0].billing.country}
+	p <strong>Postal Code:</strong> #{users[0].billing.postalCode}
+	
+	p -------
